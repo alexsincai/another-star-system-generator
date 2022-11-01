@@ -1,0 +1,11 @@
+html {
+    background: radial-gradient(
+        at center,
+        hsl(216, 45%, 24%) 15%,
+        hsl(216, 45%, 4%) 85%
+    );
+}
+
+body {
+    overflow: hidden;
+}
