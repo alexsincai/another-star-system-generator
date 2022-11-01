@@ -1,46 +1,45 @@
 {
-    "name": "yet-another-star-system-generator",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
+    "name": "starsystem",
+    "version": "0.1.0",
+    "private": true,
     "homepage": ".",
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "scripts": {
-        "dev": "webpack serve --mode development",
-        "prod": "webpack --mode production",
-        "deploy": "npm run prod && gh-pages -d dist"
-    },
     "dependencies": {
-        "colorjs.io": "^0.4.0",
-        "dat.gui": "^0.7.9",
+        "@react-three/drei": "^9.36.0",
+        "@react-three/fiber": "^8.8.10",
+        "@react-three/postprocessing": "^2.7.0",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-scripts": "5.0.1",
         "seedrandom": "^3.0.5",
+        "the-new-css-reset": "^1.7.3",
         "three": "^0.145.0"
     },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject",
+        "deploy": "npm run build && gh-pages -d build"
+    },
+    "eslintConfig": {
+        "extends": [
+            "react-app",
+            "react-app/jest"
+        ]
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
     "devDependencies": {
-        "@babel/core": "^7.19.6",
-        "@babel/preset-env": "^7.19.4",
-        "autoprefixer": "^10.4.12",
-        "babel-loader": "^8.2.5",
-        "copy-webpack-plugin": "^11.0.0",
-        "css-loader": "^6.7.1",
-        "css-minimizer-webpack-plugin": "^4.2.2",
-        "cssnano": "^5.1.13",
-        "eslint": "^8.26.0",
-        "gh-pages": "^4.0.0",
-        "html-minimizer-webpack-plugin": "^4.3.0",
-        "mini-css-extract-plugin": "^2.6.1",
-        "postcss-assets": "^6.0.0",
-        "postcss-extend": "^1.0.5",
-        "postcss-import": "^15.0.0",
-        "postcss-loader": "^7.0.1",
-        "postcss-preset-env": "^7.8.2",
-        "style-loader": "^3.3.1",
-        "terser-webpack-plugin": "^5.3.6",
-        "the-new-css-reset": "^1.7.3",
-        "webpack": "^5.74.0",
-        "webpack-cli": "^4.10.0",
-        "webpack-dev-server": "^4.11.1"
+        "gh-pages": "^4.0.0"
     }
 }

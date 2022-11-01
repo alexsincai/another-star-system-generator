@@ -1,11 +1,6 @@
 import seedrandom from "seedrandom";
+import { MeshLambertMaterial, SphereGeometry, Mesh } from "three";
 import Color from "colorjs.io";
-import {
-    MeshLambertMaterial,
-    Mesh,
-    TorusBufferGeometry,
-    IcosahedronGeometry,
-} from "three";
 
 //  round value v to precision dec
 export const round = (v, dec = 3) =>
@@ -23,8 +18,14 @@ export const mapRange = (value, fromMin, fromMax, toMin, toMax) => {
 export const range = (seed, min = 0, max = 1) =>
     mapRange(seedrandom(seed)(), 0, 1, min, max);
 
-//  get a handom pastel color (random hue, low saturation, high lightness)
-export const randomPastel = (seed, min = 0, max = 360) =>
+//  return [x,y,z] from distance, horizontalAngle, verticalAngle, optional center
+export const calculatePosition = (rho, phi, theta, center = [0, 0, 0]) => [
+    rho * Math.cos(phi) * Math.sin(theta) + center[0],
+    rho * Math.sin(phi) + center[1],
+    rho * Math.cos(phi) * Math.cos(theta) + center[2],
+];
+
+export const randomPastel = (seed, min=0, max=360) =>
     Number(
         new Color("lch", [
             range(seed, 70, 90),
@@ -36,32 +37,11 @@ export const randomPastel = (seed, min = 0, max = 360) =>
             .replace("#", "0x")
     );
 
-//  build a sphere mesh
-export const Sphere = (radius = 1, color = 0xdddddd, emit = false) => {
+export const Sphere = (radius = 1, color = 0xdddddd, center = [0, 0, 0]) => {
     const object = new Mesh(
-        new IcosahedronGeometry(radius, 3),
-        new MeshLambertMaterial({
-            wireframe: false,
-            color,
-            emissive: emit ? color : 0x000000,
-        })
+        new SphereGeometry(radius, 32, 64),
+        new MeshLambertMaterial({ color })
     );
-    return object;
-};
-
-//  build a torus mesh
-export const Orbit = (radius = 1, size = 1, start = 0, end = Math.PI * 2) => {
-    const color = 0x888888;
-    const object = new Mesh(
-        new TorusBufferGeometry(radius, size / 50, 16, 360, end + start),
-        new MeshLambertMaterial({
-            wireframe: false,
-            color: color,
-        })
-    );
-
-    object.rotation.x = Math.PI / 2;
-    object.rotation.z = start;
-
+    object.position.set(...center);
     return object;
 };
